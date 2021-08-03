@@ -1,4 +1,4 @@
-# xstate-tutorial
+# xstate + vue example
 
 ## Project setup
 ```
