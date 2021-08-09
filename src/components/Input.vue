@@ -10,12 +10,15 @@
       :id="id"
       class="w-full px-3 py-1 text-base text-gray-700 bg-white border border-gray-300 rounded outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 leading-8 transition-colors duration-200 ease-in-out"
       v-bind="$attrs"
+      v-model="text"
       :class="{ 'has-error': hasError }"
     />
   </div>
 </template>
 
 <script>
+import { computed } from "vue";
+
 export default {
   name: "Input",
   props: {
@@ -39,6 +42,19 @@ export default {
       type: String,
       default: "",
     },
+    modelValue: {
+      type: String,
+      default: "",
+    },
+  },
+  setup(props, { emit }) {
+    const text = computed({
+      get: () => props.modelValue,
+      set: (value) => emit("update:modelValue", value),
+    });
+    return {
+      text,
+    };
   },
 };
 </script>

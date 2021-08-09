@@ -10,6 +10,7 @@
     <textarea
       :id="id"
       v-bind="$attrs"
+      v-model="text"
       class="w-full h-32 px-3 py-1 text-base text-gray-700 bg-white border border-gray-300 rounded outline-none resize-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-200 leading-6 transition-colors duration-200 ease-in-out"
       :class="{ 'has-error': hasError }"
     ></textarea>
@@ -17,6 +18,8 @@
 </template>
 
 <script>
+import { computed } from "vue";
+
 export default {
   name: "Textarea",
   props: {
@@ -40,6 +43,19 @@ export default {
       type: String,
       default: "",
     },
+    modelValue: {
+      type: String,
+      default: "",
+    },
+  },
+  setup(props, { emit }) {
+    const text = computed({
+      get: () => props.modelValue,
+      set: (value) => emit("update:modelValue", value),
+    });
+    return {
+      text,
+    };
   },
 };
 </script>
